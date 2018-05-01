@@ -10,8 +10,11 @@ namespace RequestAbortRepro.Controllers
 {
     public class HomeController : Controller
     {
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
+            // Breakpoint Here. Debug Using IIS Express and Cancel Using the Browser
+            //  Then Do it Again Debugging Under Kestrel
+            var a = HttpContext.RequestAborted.IsCancellationRequested;
             HttpContext.RequestAborted.ThrowIfCancellationRequested();
             return View();
         }
